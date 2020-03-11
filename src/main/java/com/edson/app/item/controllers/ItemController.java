@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edson.app.item.models.Item;
+import com.edson.app.item.models.Produto;
 import com.edson.app.item.models.services.ItemService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 public class ItemController {
@@ -23,8 +25,20 @@ public class ItemController {
 		return itemService.findAll();
 	}
 	
+	@HystrixCommand(fallbackMethod = "metodoAlternativo")
 	@GetMapping("/items/{id}/quantidade/{quantidade}")
 	public Item show(@PathVariable Long id, @PathVariable Integer quantidade) {
 		return itemService.findById(id, quantidade);
+	}
+	
+	public Item metodoAlternativo(@PathVariable Long id, @PathVariable Integer quantidade) {
+		Item item = new Item();
+		Produto produto = new Produto();
+		item.setQuantidade(quantidade);
+		produto.setId(id);
+		produto.setNome("Notebook");
+		produto.setPreco(3_000.00);
+		item.setProduto(produto);
+		return item;
 	}
 }
