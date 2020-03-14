@@ -1,9 +1,14 @@
 package com.edson.app.item.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +24,9 @@ public class ItemController {
 	@Autowired
 	@Qualifier("serviceFeign")
 	private ItemService itemService;
+
+	@Value("${configuracao.texto}")
+	private String texto;
 	
 	@GetMapping("/items")
 	public List<Item> index() {
@@ -40,5 +48,13 @@ public class ItemController {
 		produto.setPreco(3_000.00);
 		item.setProduto(produto);
 		return item;
+	}
+	
+	@GetMapping("/obter-config")
+	public ResponseEntity<?> obterConfiguracao(@Value("${server.port}") String port) {
+		Map<String, String> json = new HashMap<String, String>();
+		json.put("texto", texto);
+		json.put("port", port);
+		return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
 	}
 }
