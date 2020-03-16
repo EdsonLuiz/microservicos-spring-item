@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edson.app.item.models.Item;
-import com.edson.app.item.models.Produto;
+import com.edson.app.commons.models.entities.Produto;
 import com.edson.app.item.models.services.ItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 

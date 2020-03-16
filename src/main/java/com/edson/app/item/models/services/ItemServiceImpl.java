@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.edson.app.item.models.Item;
-import com.edson.app.item.models.Produto;
+import com.edson.app.commons.models.entities.Produto;
 
 @Service
 public class ItemServiceImpl implements ItemService {

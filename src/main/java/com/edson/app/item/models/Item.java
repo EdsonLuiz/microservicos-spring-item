@@ -1,5 +1,7 @@
 package com.edson.app.item.models;
 
+import com.edson.app.commons.models.entities.Produto;
+
 public class Item {
 
 	private Produto produto;

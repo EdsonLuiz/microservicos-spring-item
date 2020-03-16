@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.edson.app.item.clientes.ProdutoClienteRest;
 import com.edson.app.item.models.Item;
-import com.edson.app.item.models.Produto;
+import com.edson.app.commons.models.entities.Produto;
 
 @Service("serviceFeign")
 @Primary
